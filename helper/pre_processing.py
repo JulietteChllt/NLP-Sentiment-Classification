@@ -499,8 +499,7 @@ def get_pre_process_data(positive=True, full=False, ponctuation=True, letter_rep
         PATH = '../Resources/' + save_file_name
         if os.path.exists(PATH):
             with open(PATH) as f:
-                data = csv.reader(f, quoting=csv.QUOTE_ALL)
-                return list(data)
+                return f.read().splitlines()
 
     # load the raw data set
     if positive:
@@ -555,8 +554,8 @@ def get_pre_process_data(positive=True, full=False, ponctuation=True, letter_rep
     # save data in file
     if save_file_name != "":
         with open(PATH, 'w') as myfile:
-            wr = csv.writer(myfile, quoting=csv.QUOTE_ALL)
-            wr.writerow(data)
+            for l in data:
+                myfile.write(l + "\n")
 
     return data
 
