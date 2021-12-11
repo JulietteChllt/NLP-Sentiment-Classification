@@ -483,6 +483,11 @@ def negative_positive_word_treatment(tweet_list):
     return [" ".join(check_word(w) for w in tweet.split()) for tweet in tweet_list]
 
 
+def unique_non_empty(tweet_list):
+    tweet_list = list(set(tweet_list))
+    return [t for t in tweet_list if t]
+
+
 """
 argument : booleans to specify which process function to call, and a name to save it
 Will load the raw dataset and will process it with the appropriate functions.
@@ -517,6 +522,8 @@ def get_pre_process_data(positive=True, full=False, ponctuation=True, letter_rep
             with open(PATH_TRAIN_NEG) as f:
                 data = f.read().splitlines()
 
+    data = unique_non_empty(data)
+
     # call the process functions
     if ponctuation:
         data = replace_ponctuation(data)
@@ -550,6 +557,8 @@ def get_pre_process_data(positive=True, full=False, ponctuation=True, letter_rep
         data = lemmatizing_treatment2(data)
     if neg_pos_word:
         data = negative_positive_word_treatment(data)
+
+    data = unique_non_empty(data)
 
     # save data in file
     if save_file_name != "":
