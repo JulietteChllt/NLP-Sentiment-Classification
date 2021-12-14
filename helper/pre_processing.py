@@ -1,5 +1,5 @@
 """
-Import the necessary libraries 
+Import the necessary libraries
 """
 import os
 import csv
@@ -22,8 +22,8 @@ from gingerit.gingerit import GingerIt
 
 
 """
-Import the necessary datasets : 
-positive and negative training sets and 
+Import the necessary datasets :
+positive and negative training sets and
 positive and negative word dictionnaries
 """
 PATH_TRAIN_NEG = '../Resources/train_neg.txt'
@@ -47,7 +47,7 @@ with open(PATH_DICT_NEG, encoding="ISO-8859-1") as f:
 
 """
 Download english stopwords library from the nltk package
-Initialise stemmer using nltk PorterStemmer function 
+Initialise stemmer using nltk PorterStemmer function
 Initialise lemmatizer using nltk WordNetLemmatizer function
 """
 nltk.download('stopwords')
@@ -151,7 +151,7 @@ def hashtag_treatment(tweet_list):
 """
 argument : tweet_list (list of strings)
 Replace current expression in their contracted form with their full form
-ex : I've gotta go -> I have got to go 
+ex : I've gotta go -> I have got to go
 """
 
 
@@ -212,8 +212,8 @@ def apostrophe_contraction(tweet_list):
 
 """
 argument : tweet_list (list of strings)
-Replace current slang words with their meaning using our mapping 
-ex : 'cya 2nite gurl' -> 'see you tonight girl' 
+Replace current slang words with their meaning using our mapping
+ex : 'cya 2nite gurl' -> 'see you tonight girl'
 """
 
 
@@ -315,7 +315,7 @@ def correct_slang(tweet_list):
 
 """
 argument : tweet_list (list of strings)
-Replace current slang words with their meaning using gingerIt package 
+Replace current slang words with their meaning using gingerIt package
 """
 
 
@@ -332,7 +332,7 @@ def correct_slang2(tweet_list):
 
 """
 argument : tweet_list (list of strings)
-Remove words that have length one 
+Remove words that have length one
 """
 
 
@@ -369,7 +369,7 @@ def numbers_treatment(tweet_list):
 
 """
 argument : tweet_list (list of strings)
-Replace words that are not uniquely composed of alphabetic characters (ie contain numbers or special characters) 
+Replace words that are not uniquely composed of alphabetic characters (ie contain numbers or special characters)
 """
 
 
@@ -413,7 +413,7 @@ def stopwords_treatment(tweet_list):
 
 """
 argument : tweet_list (list of strings)
-Remove suffix of words 
+Remove suffix of words
 ex : studies study studying studied -> studi studi studi studi
 """
 
@@ -430,7 +430,7 @@ def stemming_treatment(tweet_list):
 # try with wordNet but not that great
 """
 argument : tweet_list (list of strings)
-Replace words with the root of the word 
+Replace words with the root of the word
 ex : studies study studying studied -> study study studying studied
 """
 
@@ -447,7 +447,7 @@ def lemmatizing_treatment(tweet_list):
 # now with Pattern lemmatizer : seems to work great !
 """
 argument : tweet_list (list of strings)
-Replace words with the root of the word 
+Replace words with the root of the word
 ex : studies study studying studied -> study study study study
 """
 
@@ -553,7 +553,7 @@ def get_pre_process_data(positive=True, full=False, ponctuation=True, letter_rep
         data = stemming_treatment(data)
     if lemmatizing:
         data = lemmatizing_treatment(data)
-    elif lemmatizing2:
+    if lemmatizing2:
         data = lemmatizing_treatment2(data)
     if neg_pos_word:
         data = negative_positive_word_treatment(data)
@@ -565,6 +565,61 @@ def get_pre_process_data(positive=True, full=False, ponctuation=True, letter_rep
         with open(PATH, 'w') as myfile:
             for l in data:
                 myfile.write(l + "\n")
+
+    return data
+
+
+def get_pre_process_data_test(ponctuation=True, letter_repetition=True,
+                              emoji=True, hashtag=True, apostroph=True, slang=True, slang2=False,
+                              short_word=True, numbers=True, spelling=False, alphabetic=True,
+                              stopwords=True, stemming=False, lemmatizing=False, lemmatizing2=True, neg_pos_word=True):
+    PATH = '../Resources/test_data_process.txt'
+    # file already exists
+    if os.path.exists(PATH):
+        with open(PATH) as f:
+            return f.read().splitlines()
+
+    # load the raw data set
+    data = [line.rstrip('\n') for line in open('../Resources/test_data.txt')]
+
+    # call the process functions
+    if ponctuation:
+        data = replace_ponctuation(data)
+    if letter_repetition:
+        data = letter_repetition_treatment(data)
+    if emoji:
+        data = emoji_treatment(data)
+    if hashtag:
+        data = hashtag_treatment(data)
+    if apostroph:
+        data = apostrophe_contraction(data)
+    if slang:
+        data = correct_slang(data)
+    if slang2:
+        data = correct_slang2(data)
+    if short_word:
+        data = short_word_treatment(data)
+    if numbers:
+        data = numbers_treatment(data)
+    if alphabetic:
+        data = non_alphabetic_treatment(data)
+    if spelling:
+        data = correct_spelling(data)
+    if stopwords:
+        data = stopwords_treatment(data)
+    if stemming:
+        data = stemming_treatment(data)
+    if lemmatizing:
+        data = lemmatizing_treatment(data)
+    if lemmatizing2:
+        data = lemmatizing_treatment2(data)
+    if neg_pos_word:
+        data = negative_positive_word_treatment(data)
+
+    # save data in file
+    with open(PATH, 'w') as myfile:
+        for l in data:
+            myfile.write(l + "\n")
 
     return data
 
@@ -582,7 +637,7 @@ def label_data(train_pos, train_neg):
     train_pos = np.concatenate((train_pos, ones), axis=1)
 
     train_neg = np.array(train_neg).reshape(-1, 1)
-    neg_ones = np.zeros(shape=(train_neg.shape[0], 1))-1
+    neg_ones = np.zeros(shape=(train_neg.shape[0], 1)) - 1
     train_neg = np.concatenate((train_neg, neg_ones), axis=1)
 
     return (train_pos, train_neg)
