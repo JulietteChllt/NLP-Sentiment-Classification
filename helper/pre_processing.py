@@ -18,6 +18,9 @@ import matplotlib as plt
 import seaborn as sns
 import re
 from ekphrasis.classes.spellcorrect import SpellCorrector
+from ekphrasis.classes.preprocessor import TextPreProcessor
+from ekphrasis.classes.tokenizer import SocialTokenizer
+from ekphrasis.dicts.emoticons import emoticons
 from gingerit.gingerit import GingerIt
 
 
@@ -35,9 +38,9 @@ PATH_TRAIN_POS_FULL = '../Resources/train_pos_full.txt'
 PATH_DICT_POS = '../Resources/positive-words.txt'
 PATH_DICT_NEG = '../Resources/negative-words.txt'
 
-with open(PATH_TRAIN_POS) as f:
+with open(PATH_TRAIN_POS,errors = 'ignore') as f:
     train_pos = f.read().splitlines()
-with open(PATH_TRAIN_NEG) as f:
+with open(PATH_TRAIN_NEG,errors = 'ignore') as f:
     train_neg = f.read().splitlines()
 with open(PATH_DICT_POS, encoding="ISO-8859-1") as f:
     POSITIVE_WORDS_LIST = set((x.strip() for x in f.readlines()))
@@ -228,6 +231,10 @@ def correct_slang(tweet_list):
         'ace': 'success',
         'ad': 'awesome person',
         'af': 'very',  # mmmh could do better : word af  -> very word maybe ?
+        'aha' : 'laught',
+        'ahah' : 'laught',
+        'ahaha' : 'laught',
+        'alot' : 'a lot',
         'aka': 'meaning',
         'asap': 'soon',
         'aww': 'cute',
@@ -237,6 +244,7 @@ def correct_slang(tweet_list):
         'brb': 'I come',
         'btr': 'better',
         'btw': 'by the way',
+        'cud': 'could',
         'cus': 'because',
         'cuz': 'because',
         'cya': 'see you',
@@ -249,6 +257,7 @@ def correct_slang(tweet_list):
         'dnt': 'do not',
         'dw': 'okay',
         'ew': 'gross',
+        'fav' : 'favorite',
         'ftw': 'win',
         'fyi': 'for information',
         'gf': 'girlfriend',
@@ -262,6 +271,7 @@ def correct_slang(tweet_list):
         'hmu': 'message me',
         'idk': 'do not know',
         'idc': 'do not care',
+        'iknow' : 'I know',
         'ily': 'love',
         'imo': 'think',
         'irl': 'real life',
@@ -287,6 +297,7 @@ def correct_slang(tweet_list):
         'sch': 'school',
         'tbh': 'honestly',
         'til': 'until',
+        'tha' : 'the',
         'thx': 'thanks',
         'ttyl': 'talk later',
         'u': 'you',
@@ -487,39 +498,74 @@ def unique_non_empty(tweet_list):
     tweet_list = list(set(tweet_list))
     return [t for t in tweet_list if t]
 
+#from ekphrasis
+def create_text_preprocessor() : 
+    text_processor = TextPreProcessor(
+    # terms that will be normalized
+        normalize=['url', 'email', 'percent', 'money', 'phone', 'user',
+            'time', 'url', 'date', 'number'],
+    # terms that will be annotated
+        annotate={"hashtag", "allcaps", "elongated", "repeated",
+            'emphasis', 'censored'},
+        fix_html=True,  # fix HTML tokens
+    
+    # corpus from which the word statistics are going to be used 
+    # for word segmentation 
+        segmenter="twitter", 
+    
+    # corpus from which the word statistics are going to be used 
+    # for spell correction
+        corrector="twitter", 
+    
+        unpack_hashtags=True,  # perform word segmentation on hashtags
+        unpack_contractions=True,  # Unpack contractions (can't -> can not)
+        spell_correct_elong=False,  # spell correction for elongated words
+    
+    # select a tokenizer. You can use SocialTokenizer, or pass your own
+    # the tokenizer, should take as input a string and return a list of tokens
+        tokenizer=SocialTokenizer(lowercase=True).tokenize,
+    
+    # list of dictionaries, for replacing tokens extracted from the text,
+    # with other expressions. You can pass more than one dictionaries.
+        dicts=[emoticons]
+    )
+    
+def preprocess_ekphrasis(tweet_list) : 
+    text_preprocessor = create_text_preprocessor()
+    return " ".join(text_preprocessor.pre_process_doc(tweet_list))
+
 
 """
 argument : booleans to specify which process function to call, and a name to save it
 Will load the raw dataset and will process it with the appropriate functions.
 """
-
-
 def get_pre_process_data(positive=True, full=False, ponctuation=True, letter_repetition=True,
                          emoji=True, hashtag=True, apostroph=True, slang=True, slang2=False,
                          short_word=True, numbers=True, spelling=False, alphabetic=True,
-                         stopwords=True, stemming=False, lemmatizing=False, lemmatizing2=True, neg_pos_word=True, save_file_name=""):
+                         stopwords=True, stemming=False, lemmatizing=False, lemmatizing2=True, neg_pos_word=True, ekphrasis = False, save_file_name=""):
 
     # file already exists
     if save_file_name != "":
         PATH = '../Resources/' + save_file_name
         if os.path.exists(PATH):
-            with open(PATH) as f:
+            with open(PATH,errors = 'ignore') as f:
                 return f.read().splitlines()
 
     # load the raw data set
     if positive:
         if full:
-            with open(PATH_TRAIN_POS_FULL) as f:
+            with open(PATH_TRAIN_POS_FULL, errors = 'ignore') as f:
                 data = f.read().splitlines()
         else:
-            with open(PATH_TRAIN_POS) as f:
+            with open(PATH_TRAIN_POS, errors = 'ignore') as f:
                 data = f.read().splitlines()
     else:
         if full:
-            with open(PATH_TRAIN_NEG_FULL) as f:
-                data = f.read().splitlines()
+            with open(PATH_TRAIN_NEG_FULL, errors = 'ignore') as f:
+                data = [tweet.rstrip('\n') for tweet in f]
+                #data = f.read().splitlines()
         else:
-            with open(PATH_TRAIN_NEG) as f:
+            with open(PATH_TRAIN_NEG, errors = 'ignore') as f:
                 data = f.read().splitlines()
 
     data = unique_non_empty(data)
@@ -557,6 +603,8 @@ def get_pre_process_data(positive=True, full=False, ponctuation=True, letter_rep
         data = lemmatizing_treatment2(data)
     if neg_pos_word:
         data = negative_positive_word_treatment(data)
+    if ekphrasis : 
+        data = preprocess_ekphrasis(data)
 
     data = unique_non_empty(data)
 
@@ -572,15 +620,20 @@ def get_pre_process_data(positive=True, full=False, ponctuation=True, letter_rep
 def get_pre_process_data_test(ponctuation=True, letter_repetition=True,
                               emoji=True, hashtag=True, apostroph=True, slang=True, slang2=False,
                               short_word=True, numbers=True, spelling=False, alphabetic=True,
-                              stopwords=True, stemming=False, lemmatizing=False, lemmatizing2=True, neg_pos_word=True):
-    PATH = '../Resources/test_data_process.txt'
+                              stopwords=True, stemming=False, lemmatizing=False, lemmatizing2=True, neg_pos_word=True,ekphrasis = False, save_file_name=""):
+    #PATH = '../Resources/test_data_process.txt'
+    
     # file already exists
-    if os.path.exists(PATH):
-        with open(PATH) as f:
-            return f.read().splitlines()
+    if save_file_name != "":
+        PATH = '../Resources/' + save_file_name
+        if os.path.exists(PATH):
+            with open(PATH,errors = 'ignore') as f:
+                return f.read().splitlines()
 
     # load the raw data set
-    data = [line.rstrip('\n') for line in open('../Resources/test_data.txt')]
+    data = [line.rstrip('\n') for line in open('../Resources/test_data.txt', errors = 'ignore')]
+    #remove identifier from the tweet
+    data = [line.split(',', 1)[1] for line in data]
 
     # call the process functions
     if ponctuation:
@@ -615,11 +668,14 @@ def get_pre_process_data_test(ponctuation=True, letter_repetition=True,
         data = lemmatizing_treatment2(data)
     if neg_pos_word:
         data = negative_positive_word_treatment(data)
+    if ekphrasis : 
+        data = preprocess_ekphrasis(data)
 
     # save data in file
-    with open(PATH, 'w') as myfile:
-        for l in data:
-            myfile.write(l + "\n")
+    if save_file_name != "":
+        with open(PATH, 'w',errors = 'ignore') as myfile:
+            for l in data:
+                myfile.write(l + "\n")
 
     return data
 
