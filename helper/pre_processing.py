@@ -499,14 +499,14 @@ def unique_non_empty(tweet_list):
     return [t for t in tweet_list if t]
 
 #from ekphrasis
-def create_text_preprocessor() : 
+def create_text_preprocessor():
     text_processor = TextPreProcessor(
     # terms that will be normalized
         normalize=['url', 'email', 'percent', 'money', 'phone', 'user',
-            'time', 'url', 'date', 'number'],
+        'time', 'url', 'date', 'number'],
     # terms that will be annotated
         annotate={"hashtag", "allcaps", "elongated", "repeated",
-            'emphasis', 'censored'},
+        'emphasis', 'censored'},
         fix_html=True,  # fix HTML tokens
     
     # corpus from which the word statistics are going to be used 
@@ -519,7 +519,8 @@ def create_text_preprocessor() :
     
         unpack_hashtags=True,  # perform word segmentation on hashtags
         unpack_contractions=True,  # Unpack contractions (can't -> can not)
-        spell_correct_elong=False,  # spell correction for elongated words
+        spell_correct_elong=True,  # spell correction for elongated words
+        spell_correction=True,
     
     # select a tokenizer. You can use SocialTokenizer, or pass your own
     # the tokenizer, should take as input a string and return a list of tokens
@@ -529,10 +530,13 @@ def create_text_preprocessor() :
     # with other expressions. You can pass more than one dictionaries.
         dicts=[emoticons]
     )
+    return text_processor
     
 def preprocess_ekphrasis(tweet_list) : 
-    text_preprocessor = create_text_preprocessor()
-    return " ".join(text_preprocessor.pre_process_doc(tweet_list))
+    text_processor = create_text_preprocessor()
+    for tweet in tweet_list:
+        tweet = " ".join(text_processor.pre_process_doc(tweet))
+    return tweet_list
 
 
 """
