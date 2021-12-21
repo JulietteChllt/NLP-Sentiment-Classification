@@ -5,36 +5,36 @@ This projects explores different ways to perform sentiment analysis on natural t
 ##Libraries
 
 * [Nltk] - Download nltk packages
-'''$ python
+```$ python
 $ >>> import nltk
-$ >>> nltk.download()'''
+$ >>> nltk.download()```
 
 * [Wordninja] - Install wordninja library
-'''$ pip install worldninja'''
+```$ pip install worldninja```
 
 * [Gingerit] - Install gingerit library
-'''$ pip install gingerit'''
+```$ pip install gingerit```
 
 * [Ekphrasis] - Install ekphrasis library
-'''$ pip3 install ekphrasis'''
+```$ pip3 install ekphrasis```
 
 * [Pattern] - Install Pattern library
-'''$ pip install pattern'''
+```$ pip install pattern```
 
 * [Gensim] - Install Gensim library
-'''$ conda install gensim'''
+```$ conda install gensim```
 
 * [Tensorflow] -Install tensorflow library
-'''pip install tensorflow'''
+```pip install tensorflow```
 
 * [GloVe] - Install glove python binary library
-'''$ pip install glove-python-binary'''
+```$ pip install glove-python-binary```
 
 * [Keras] - Install keras library
-'''$ pip install keras'''
+```$ pip install keras```
 
 * [Seaborn] - Install seaborn library
-'''$ pip install seaborn'''
+```$ pip install seaborn```
 
 ## Processing
 
