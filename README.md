@@ -2,6 +2,40 @@
 
 This projects explores different ways to perform sentiment analysis on natural text data extracted from Twitter.  The data are tweets that had a positive or a negative emoji, the aim is to recover this information. We are also given some training data. All data can be downloaded at this [address](https://www.aicrowd.com/challenges/epfl-ml-text-classification).
 
+##Libraries
+
+* [Nltk] - Download nltk packages
+'''$ python
+$ >>> import nltk
+$ >>> nltk.download()'''
+
+* [Wordninja] - Install wordninja library
+'''$ pip install worldninja'''
+
+* [Gingerit] - Install gingerit library
+'''$ pip install gingerit'''
+
+* [Ekphrasis] - Install ekphrasis library
+'''$ pip3 install ekphrasis'''
+
+* [Pattern] - Install Pattern library
+'''$ pip install pattern'''
+
+* [Gensim] - Install Gensim library
+'''$ conda install gensim'''
+
+* [Tensorflow] -Install tensorflow library
+'''pip install tensorflow'''
+
+* [GloVe] - Install glove python binary library
+'''$ pip install glove-python-binary'''
+
+* [Keras] - Install keras library
+'''$ pip install keras'''
+
+* [Seaborn] - Install seaborn library
+'''$ pip install seaborn'''
+
 ## Processing
 
 A crucial step of the classification is to preprocess the raw tweets given as data. This is done in the [pre_processing](helper/pre_processing.py) file. The two functions *get_pre_process_data* and *get_pre_process_data_test* can perform these different task : 
@@ -42,7 +76,7 @@ We implemented some classical machine learning algorithm on our preprocessed dat
 - Passive-Aggresive.
 - Nearest Centroid.
 
-Our best results were with the *Logistic Regression* with 84.38% accuracy on the test dataset.
+Our best results were with the *Logistic Regression* with 85.4% accuracy on the test dataset on AIcrowd.
 
 ## Neural networks
 
