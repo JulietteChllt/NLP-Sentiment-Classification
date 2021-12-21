@@ -4,11 +4,12 @@ This projects explores different ways to perform sentiment analysis on natural t
 
 ##Libraries
 
-* [Nltk] - Download nltk packages
+* [Nltk](https://www.nltk.org/ "Nltk") - Download nltk packages
 ```$ python
-$ >>> import nltk
-$ >>> nltk.download()```
-
+   $ import nltk
+   $ nltk.download()
+   ```
+   
 * [Wordninja] - Install wordninja library
 ```$ pip install worldninja```
 
