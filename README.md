@@ -10,31 +10,31 @@ This projects explores different ways to perform sentiment analysis on natural t
    $ nltk.download()
    ```
    
-* [Wordninja] - Install wordninja library
+* [Wordninja](https://github.com/keredson/wordninja "git wordninja") - Install wordninja library
 ```$ pip install worldninja```
 
-* [Gingerit] - Install gingerit library
+* [Gingerit](https://github.com/Azd325/gingerit "git gingerit") - Install gingerit library
 ```$ pip install gingerit```
 
-* [Ekphrasis] - Install ekphrasis library
+* [Ekphrasis](https://github.com/cbaziotis/ekphrasis "ekphrasis") - Install ekphrasis library
 ```$ pip3 install ekphrasis```
 
-* [Pattern] - Install Pattern library
+* [Pattern](https://github.com/clips/pattern "Pattern") - Install Pattern library
 ```$ pip install pattern```
 
-* [Gensim] - Install Gensim library
+* [Gensim](https://github.com/RaRe-Technologies/gensim "gensim") - Install Gensim library
 ```$ conda install gensim```
 
-* [Tensorflow] -Install tensorflow library
+* [Tensorflow](https://www.tensorflow.org/ "tensor") -Install tensorflow library
 ```pip install tensorflow```
 
-* [GloVe] - Install glove python binary library
+* [GloVe](https://github.com/stanfordnlp/GloVe "glove') - Install glove python binary library
 ```$ pip install glove-python-binary```
 
-* [Keras] - Install keras library
+* [Keras](https://keras.io/ "keras") - Install keras library
 ```$ pip install keras```
 
-* [Seaborn] - Install seaborn library
+* [Seaborn](https://github.com/mwaskom/seaborn "seaborn") - Install seaborn library
 ```$ pip install seaborn```
 
 ## Processing
