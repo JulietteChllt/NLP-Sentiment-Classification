@@ -28,7 +28,7 @@ This projects explores different ways to perform sentiment analysis on natural t
 * [Tensorflow](https://www.tensorflow.org/ "tensor") -Install tensorflow library
 ```pip install tensorflow```
 
-* [GloVe](https://github.com/stanfordnlp/GloVe "glove') - Install glove python binary library
+* [GloVe](https://github.com/stanfordnlp/GloVe "glove") - Install glove python binary library
 ```$ pip install glove-python-binary```
 
 * [Keras](https://keras.io/ "keras") - Install keras library
