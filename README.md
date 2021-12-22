@@ -65,11 +65,10 @@ One important step in natural language processing is the representation of words
 
 ## Classic machine learning
 
-We implemented some classical machine learning algorithm on our preprocessed data using the library **sklearn**. You can run these following algorithm in the [ML_implementations](helper/ML_implementations.ipynb) file :
+We implemented some classical machine learning algorithms on our preprocessed data using the library **sklearn**. You can find and these algorithms in the [ML_implementations](helper/ML_implementations.ipynb) file. The algorithms implemented are :
 
 - Logistic regression.
-- Support Vector Machine (SVM).
-- SVM with L1_based feature selection.
+- Support Vector Machine (SVM) both with l1 and l2 norm.
 - Multinomial Naive Bayes.
 - Bernouilli Naive Bayes.
 - Ridge Classifier.
