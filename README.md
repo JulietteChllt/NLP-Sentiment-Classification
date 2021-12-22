@@ -2,7 +2,7 @@
 
 This projects explores different ways to perform sentiment analysis on natural text data extracted from Twitter.  The data are tweets that had a positive or a negative emoji, the aim is to recover this information. We are also given some training data. All data can be downloaded at this [address](https://www.aicrowd.com/challenges/epfl-ml-text-classification).
 
-##Libraries
+## Libraries
 
 * [Nltk](https://www.nltk.org/ "Nltk") - Download nltk packages
 ```$ python
