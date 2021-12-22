@@ -35,8 +35,8 @@ PATH_TRAIN_POS = '../Resources/train_pos.txt'
 PATH_TRAIN_NEG_FULL = '../Resources/train_neg_full.txt'
 PATH_TRAIN_POS_FULL = '../Resources/train_pos_full.txt'
 
-PATH_DICT_POS = '../Resources/positive-words.txt'
-PATH_DICT_NEG = '../Resources/negative-words.txt'
+PATH_DICT_POS = '../Resources/Dict_pos_neg/positive-words.txt'
+PATH_DICT_NEG = '../Resources/Dict_pos_neg/negative-words.txt'
 
 with open(PATH_TRAIN_POS,errors = 'ignore') as f:
     train_pos = f.read().splitlines()
