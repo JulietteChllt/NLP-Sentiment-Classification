@@ -52,7 +52,7 @@ A crucial step of the classification is to preprocess the raw tweets given as da
 - Remove the numbers.
 - Stemming, reducing words to their root form.
 - Lemmatisation, grouping inflected forms of a word.
-- Adding the word *positive* (*negative*) in front of words with a positive (negative) meaning. (see [dictionnary processing](helper/dictionnaryProcessing.ipynb) file to see how the dictionaries were prepared and [dictionaries](Resources/Dict_pos_neg) to see the processed dictionaries themselves)
+- Adding the word *positive* (*negative*) in front of words with a positive (negative) meaning. (see [dictionnary processing](helper/dictionnaryProcessing.ipynb) file to see how the dictionaries were prepared and [dictionaries unprocessed](Resources/initialDictionnaries) and [dictionaries processed](Resources/Dict_pos_neg) to see the dictionaries before and after processing).
 - Using ekphrasis Text preprocessor
 
 The processed data will be saved in a file. This will save computational time as some of those task can be really costly.
