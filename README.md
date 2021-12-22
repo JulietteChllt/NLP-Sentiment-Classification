@@ -53,6 +53,7 @@ A crucial step of the classification is to preprocess the raw tweets given as da
 - Stemming, reducing words to their root form.
 - Lemmatisation, grouping inflected forms of a word.
 - Adding the word *positive* (*negative*) in front of words with a positive (negative) meaning.
+- Using ekphrasis Text preprocessor
 
 The processed data will be saved in a file. This will save computational time as some of those task can be really costly.
 
