@@ -133,7 +133,7 @@ class SentimentClassifier(nn.Module):
       output_size = 384
     elif (model_name == 'XtremeDistil-l6-h256'):
       output_size = 256
-      output_size = 384
+ 
     else :
       output_size = 768
     self.linear1 = nn.Linear(output_size, 120)
