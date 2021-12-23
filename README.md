@@ -106,7 +106,7 @@ If arguments are provided please consider modifying those parameters in order to
 
 
 
-⚠️ If you want to skip training phase and use already our best already transfer learned model ( modified XtremeDistil-l12-h384), you can directly load our provided model (ModifiedXtremeDistil-l12-h384_full.pth) to compute your predictions.
+⚠️ If you want to skip training phase and use already our best already transfer learned model ( [modified XtremeDistil-l12-h384](https://drive.google.com/file/d/1-06z-_kkHz-iDqtFKxQvQ_QFaO8QjVtj/view?usp=sharing)), you can directly load our provided model (ModifiedXtremeDistil-l12-h384_full.pth) to compute your predictions.
 
 
 
