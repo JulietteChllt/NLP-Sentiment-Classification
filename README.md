@@ -105,8 +105,9 @@ If arguments are provided please consider modifying those parameters in order to
 |      XtremeDistil-l12-h384       |        3       |     5.e-05    |
 
 
+⚠️ In order to do transfer learning with the same data set please consider download the data set from [AIcrowd](https://www.aicrowd.com/challenges/epfl-ml-text-classification/dataset_files) and add it to Ressources directory.
 
-⚠️ If you want to skip training phase and use already our best already transfer learned model ( [modified XtremeDistil-l12-h384](https://drive.google.com/file/d/1-06z-_kkHz-iDqtFKxQvQ_QFaO8QjVtj/view?usp=sharing)), you can directly load our provided model (ModifiedXtremeDistil-l12-h384_full.pth) to compute your predictions.
+⚠️ In order to skip training phase and use already our best already transfer learned model ( [modified XtremeDistil-l12-h384](https://drive.google.com/file/d/1-06z-_kkHz-iDqtFKxQvQ_QFaO8QjVtj/view?usp=sharing)), you can directly load our provided model (ModifiedXtremeDistil-l12-h384_full.pth) to compute your predictions.
 
 
 
