@@ -96,8 +96,8 @@ We provide a run.py that re-train our Transformers Neural Networks algorithms wi
 The script requires two arguments (transformers_model_name,transformers_tokenizer_name), by default it would execute our best performing model XtremeDistil-l12-h384.
 If arguments are provided please consider modifying those parameters in order to achieve best results (i.e best accuracy and speed) :
 
-\#####################################################################
-#              model                # number epochs # learning_rate #
+\#####################################################################\
+\#              model                # number epochs # learning_rate #\
 #####################################################################
 #                                   #               #               #
 #  DistilBERT base model (uncased)  #       3       #    1.e-04     #
