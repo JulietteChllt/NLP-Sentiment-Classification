@@ -61,7 +61,7 @@ The processed data will be saved in a file. This will save computational time as
 
 ## Vector representation
 
-One important step in natural language processing is the representation of words. Machine learning algorithm can not perform directly on natural language. There is exist different methods for words embedding, we explored the **GloVe** algorithm in the [glove_algo](helper/glove_algo.ipynb) file. You have the choice to run the algorithm with a pre-trained model from the glove database and fine tuned with our datasets, or just construct a model with only our data. This method gave us a result of 73.2%.
+One important step in natural language processing is the representation of words. Machine learning algorithm can not perform directly on natural language. There is exist different methods for words embedding, we explored several including Word2Vector and **GloVe**, all methods can be found in the [word Embedding](helper/WordEmbedding.ipynb) file alors with our test on glove with a CNN alogrithm. For glove you have the choice to run the algorithm with a pre-trained model from the glove database and fine tuned with our datasets, or construct a model with only our data. The first option yield sligthly better results. Overall glove gave us results around 82%.
 
 ## Classic machine learning
 
